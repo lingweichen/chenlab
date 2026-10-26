@@ -44,6 +44,7 @@ window.PEOPLE = {
 
   groupPhoto: "lab2025.png",
   groupCaption: "Lab outing 2025",
+  groupPhotoWidth: 450,
    
   alumni: [
     { name: "Ya-Hsuan He", role: "Master’s", years: "2024–2026", thesis: "Associations of early-pregnancy dietary quality with glycemic parameters among pregnant women" },
