@@ -31,7 +31,7 @@ window.SITE = {
   links: [
     { label: "ORCID", url: "https://orcid.org/0000-0002-2661-8752" },
     { label: "Google Scholar", url: "https://scholar.google.com/citations?user=PhAXzewAAAAJ&hl=en" },
-    { label: "Web of Science", url: "https://www.webofscience.com/wos/author/record/D-5559-2016" }
+    { label: "Web of Science", url: "https://www.webofscience.com/wos/author/record/D-5559-2016" },
     { label: "LinkedIn", url:  "https://www.linkedin.com/in/lingweichen/"}
   ],
 
