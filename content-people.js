@@ -12,9 +12,6 @@
    =========================================================== */
 
 window.PEOPLE = {
-  groupPhoto: "",
-  groupCaption: "",
-
   pi: {
     name: "Ling-Wei Chen, PhD",
     role: "Associate Professor and Principal Investigator",
@@ -30,7 +27,10 @@ window.PEOPLE = {
       { label: "Languages", value: "English, Mandarin, Hakka, Malay; some Cantonese and Japanese" }
     ]
   },
-
+   
+  groupPhoto: "lab2025",
+  groupCaption: "Lab outing 2025",
+   
   members: [
     { name: "Yu-En Chen", role: "PhD student", years: "2023–", note: "Registered dietitian", topic: "Chrono-nutrition, intermittent fasting and glycemia in pregnancy" },
     { name: "Wei-Jiun Li, MD", role: "Master’s student", years: "2023–" },
