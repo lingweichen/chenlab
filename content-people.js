@@ -14,8 +14,8 @@ window.PEOPLE = {
     photo: "",
     bio: [
       "Ling-Wei Chen is a nutritional and perinatal epidemiologist. Her research asks how diet and its timing before, during and after pregnancy shape the metabolic health of mothers and their children, with a focus on chrono-nutrition, gestational diabetes and continuous glucose monitoring.",
-      "She trained at the National University of Singapore (BSc, first-class honours; PhD in Epidemiology, President’s Graduate Fellow), then worked as a research fellow at NUS Paediatrics and as a postdoctoral fellow at University College Dublin, where she led a work package on growth and cardiometabolic health in the EU-funded ALPHABET consortium. She was a research scientist at A*STAR’s Singapore Institute for Clinical Sciences before joining National Taiwan University in 2021.",
-      "She has published more than 60 peer-reviewed papers and serves as an Editorial Board Member of <em>BMC Medicine</em>."
+      "He trained at the National University of Singapore (BSc, first-class honours; PhD in Epidemiology, President’s Graduate Fellow), then worked as a research fellow at NUS Paediatrics and as a postdoctoral fellow at University College Dublin, where she led a work package on growth and cardiometabolic health in the EU-funded ALPHABET consortium. She was a research scientist at A*STAR’s Singapore Institute for Clinical Sciences before joining National Taiwan University in 2021.",
+      "He has published more than 60 peer-reviewed papers and serves as an Editorial Board Member of <em>BMC Medicine</em>."
     ],
     facts: [
       { label: "Education", value: "PhD in Epidemiology, National University of Singapore, 2014" },
