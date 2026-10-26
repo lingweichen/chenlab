@@ -43,7 +43,14 @@ window.PEOPLE = {
     { name: "Yun-Jie Yang", role: "Master’s student", years: "2025–" },
     { name: "Hsuan-Yu Yeh", role: "Master’s student (co-supervised)", years: "2025–" }
   ],
-
+   
+gallery: [
+    { photo: "lab2025.png", caption: "Lab 2025" },
+    { photo: "lab2024.png", caption: "Lab 2024" },
+    { photo: "lab2023.png", caption: "Lab 2023" },
+    { photo: "lab2022.png", caption: "Lab 2022" },
+  ],
+   
   alumni: [
     { name: "Ya-Hsuan He", role: "Master’s", years: "2024–2026", thesis: "Associations of early-pregnancy dietary quality with glycemic parameters among pregnant women" },
     { name: "Jia-Hui Wu", role: "Master’s", years: "2023–2026", thesis: "Associations of dietary glycemic index and load with glycemia during pregnancy" },
@@ -53,7 +60,5 @@ window.PEOPLE = {
     { name: "Ting-I Lee", role: "Master’s (co-supervised)", years: "2021–2023", thesis: "Associations of diet quality with cognitive frailty in community-dwelling older adults" }
   ],
 
-  gallery: [
-    { photo: "lab2025.png", caption: "Lab outing 2025" }
-  ]
+  
 };
