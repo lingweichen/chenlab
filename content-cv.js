@@ -5,7 +5,7 @@
    =========================================================== */
 
 window.CV = {
-  Positions: [
+  positions: [
     { years: "2025–", title: "Associate Professor", place: "Institute of Epidemiology and Preventive Medicine, College of Public Health, National Taiwan University" },
     { years: "2021–2025", title: "Assistant Professor", place: "Institute of Epidemiology and Preventive Medicine, College of Public Health, National Taiwan University" },
     { years: "2021–2025", title: "Adjunct Research Scientist", place: "Singapore Institute for Clinical Sciences, A*STAR, Singapore" },
@@ -14,12 +14,12 @@ window.CV = {
     { years: "2015–2017", title: "Research Fellow in Child Growth and Body Composition", place: "Department of Paediatrics, National University of Singapore" }
   ],
 
-  Education: [
+  education: [
     { years: "2010–2014", title: "PhD in Epidemiology", place: "Saw Swee Hock School of Public Health, National University of Singapore" },
     { years: "2006–2010", title: "BSc (First Class Honours) in Life Sciences", place: "Faculty of Science, National University of Singapore" }
   ],
 
-  Awards: [
+  awards: [
     { years: "2026", title: "Springer Nature Editorial Contribution Award and Author Service Award" },
     { years: "2022", title: "IUNS Early Career Travel Grant, 22nd International Congress of Nutrition, Tokyo" },
     { years: "2021–2024", title: "Incentives for Newly Hired Exceptional Talent, National Taiwan University" },
@@ -30,14 +30,14 @@ window.CV = {
     { years: "2010–2014", title: "President’s Graduate Fellowship, National University of Singapore" }
   ],
 
-  Service: [
+  service: [
     { years: "2023–", title: "Editorial Board Member, BMC Medicine" },
     { years: "2020–2026", title: "Editorial Board Member, BMC Pediatrics" },
     { years: "2018–2023", title: "Guest Editor, Frontiers in Nutrition and Nutrients (three special issues)" },
     { years: "2021–2026", title: "Grant reviewer: Foundation for Science and Technology (Portugal; Review Panel Member), UKRI/MRC (UK; ad hoc), NMRC (Singapore; ad hoc), Austrian Science Fund (Austria; ad hoc)" }
   ],
 
-  Invited talks: [
+  talks: [
     { years: "2026", title: "GDM APAC 2026 Workshop, Hong Kong" },
     { years: "2026", title: "Asia-Pacific International Symposium on Chrononutrition, Japan" },
     { years: "2026", title: "Charles Perkins Centre, University of Sydney, Australia" },
