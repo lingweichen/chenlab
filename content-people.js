@@ -28,9 +28,6 @@ window.PEOPLE = {
     ]
   },
    
-  groupPhoto: "lab2025",
-  groupCaption: "Lab outing 2025",
-   
   members: [
     { name: "Yu-En Chen", role: "PhD student", years: "2023–", note: "Registered dietitian", topic: "Chrono-nutrition, intermittent fasting and glycemia in pregnancy" },
     { name: "Wei-Jiun Li, MD", role: "Master’s student", years: "2023–" },
@@ -45,6 +42,9 @@ window.PEOPLE = {
     { name: "Hsuan-Yu Yeh", role: "Master’s student (co-supervised)", years: "2025–" }
   ],
 
+  groupPhoto: "lab2025.png",
+  groupCaption: "Lab outing 2025",
+   
   alumni: [
     { name: "Ya-Hsuan He", role: "Master’s", years: "2024–2026", thesis: "Associations of early-pregnancy dietary quality with glycemic parameters among pregnant women" },
     { name: "Jia-Hui Wu", role: "Master’s", years: "2023–2026", thesis: "Associations of dietary glycemic index and load with glycemia during pregnancy" },
