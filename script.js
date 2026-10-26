@@ -262,6 +262,15 @@
     return '<div class="monogram' + cls + '" aria-hidden="true">' + esc(initials(person.name)) + "</div>";
   }
 
+  function renderGroupPhoto(el) {
+    var P = window.PEOPLE || {};
+    if (!P.groupPhoto) return;
+    el.querySelector(".lab-photo").innerHTML =
+      '<img src="' + esc(P.groupPhoto) + '" alt="' + esc(P.groupCaption || "The research group") + '">' +
+      (P.groupCaption ? "<figcaption>" + esc(P.groupCaption) + "</figcaption>" : "");
+    el.hidden = false;
+  }
+
   function renderPI(el) {
     var pi = (window.PEOPLE || {}).pi;
     if (!pi) return;
@@ -475,6 +484,7 @@
       news: renderNews,
       selected: renderSelected,
       publications: renderPublications,
+      groupphoto: renderGroupPhoto,
       pi: renderPI,
       members: renderMembers,
       alumni: renderAlumni,

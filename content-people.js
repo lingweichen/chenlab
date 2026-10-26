@@ -5,9 +5,16 @@
    are shown instead.
    "note" and "topic" are optional.
    Move people from "members" to "alumni" when they graduate.
+
+   LAB PHOTO: upload a group photo next to index.html and write its
+   name in groupPhoto. It appears wide across the top of the Team
+   members page. groupCaption is optional. "" hides it.
    =========================================================== */
 
 window.PEOPLE = {
+  groupPhoto: "",
+  groupCaption: "",
+
   pi: {
     name: "Ling-Wei Chen, PhD",
     role: "Associate Professor and Principal Investigator",

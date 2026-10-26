@@ -465,3 +465,22 @@ h3 > .icon.lead { color: var(--night); }
 .pill .icon.lead { margin-right: 0.4em; }
 .site-footer .with-icon { text-decoration: none; display: inline-flex; align-items: center; }
 .site-footer .with-icon:hover { text-decoration: underline; }
+
+/* ---------- Lab photo (Team members page) ---------- */
+
+.lab-photo-section { padding-block: 0.5rem clamp(1.5rem, 4vw, 3rem); }
+.lab-photo { margin: 0; }
+.lab-photo img {
+  width: 100%;
+  max-height: 36rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background: var(--surface);
+}
+.lab-photo figcaption {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
+.lab-photo-section + .section { padding-top: 0; }
