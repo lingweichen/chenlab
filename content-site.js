@@ -32,7 +32,7 @@ window.SITE = {
     { label: "ORCID", url: "https://orcid.org/0000-0002-2661-8752" },
     { label: "Google Scholar", url: "https://scholar.google.com/citations?user=PhAXzewAAAAJ&hl=en" },
     { label: "Web of Science", url: "https://www.webofscience.com/wos/author/record/D-5559-2016" }
-    { label: "LinkedIn", url:  https://www.linkedin.com/in/lingweichen/}
+    { label: "LinkedIn", url:  "https://www.linkedin.com/in/lingweichen/"}
   ],
 
   // Your CV as a PDF: upload the file next to index.html and write its
