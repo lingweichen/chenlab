@@ -66,6 +66,19 @@ GitHub keeps every version, so any mistake can be undone.
 - **Link your teaching site:** paste its address into `teachingSite` in
   `content-site.js`.
 
+## Icons
+
+Profile links get their icon automatically from the web address
+(ORCID, Google Scholar, Web of Science, LinkedIn, ResearchGate, PubMed;
+anything else gets a plain link icon).
+
+To put an icon in front of a heading or label in any HTML file, add
+`data-icon="name"`, for example `<h3 data-icon="mail">Email</h3>`.
+
+Available names: mail, phone, pin, download, clock, glucose, baby,
+layers, external, link, cap, globe, users, award, talk, news, book,
+work, orcid, scholar, wos, researchgate, pubmed, linkedin.
+
 ## Previewing on your computer
 
 Unzip first, then double-click `index.html` in the unzipped folder.

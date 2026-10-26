@@ -425,3 +425,43 @@ p:last-child { margin-bottom: 0; }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--ink); }
 @media (max-width: 40rem) { .site-footer .wrap { grid-template-columns: 1fr; } }
+
+/* ---------- Icons ---------- */
+
+.icon { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+.icon.lead { display: inline-block; vertical-align: -0.17em; margin-right: 0.45em; }
+a .icon.lead { color: inherit; }
+h3 > .icon.lead { color: var(--night); }
+.prose strong > .icon.lead { color: var(--night); }
+.pub-links .icon.lead { width: 0.95em; height: 0.95em; margin-right: 0.3em; }
+
+/* round badges beside the research themes */
+.has-badge { display: grid; grid-template-columns: 2.75rem minmax(0, 1fr); column-gap: 1.1rem; }
+.has-badge > .badge { grid-row: 1 / span 4; }
+.has-badge > :not(.badge) { grid-column: 2; }
+.badge {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--night-soft); color: var(--night);
+}
+.badge .icon { width: 1.35rem; height: 1.35rem; }
+.theme-detail.has-badge > .badge { margin-top: 0.1rem; }
+@media (max-width: 30rem) {
+  .has-badge { grid-template-columns: 2.25rem minmax(0, 1fr); column-gap: 0.85rem; }
+  .badge { width: 2.25rem; height: 2.25rem; }
+  .badge .icon { width: 1.1rem; height: 1.1rem; }
+}
+
+/* profile links as small rounded buttons */
+.pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.pill {
+  display: inline-flex; align-items: center;
+  font-family: var(--sans); font-size: 0.9rem;
+  padding: 0.35rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--surface);
+  color: var(--ink); text-decoration: none;
+}
+.pill:hover { border-color: var(--night); color: var(--night); }
+.pill .icon.lead { margin-right: 0.4em; }
+.site-footer .with-icon { text-decoration: none; display: inline-flex; align-items: center; }
+.site-footer .with-icon:hover { text-decoration: underline; }

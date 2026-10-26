@@ -22,6 +22,77 @@
     return f === "" ? "index.html" : f;
   }
 
+  /* ---------- Icons ----------
+     Line icons from Lucide (lucide.dev, ISC licence); brand marks
+     from Simple Icons (CC0) and Tabler Icons (MIT).
+     In any HTML file, add data-icon="name" to an element to put an
+     icon in front of it, e.g. <h3 data-icon="mail">Email</h3>.
+     Names: mail, phone, pin, download, clock, glucose, baby, layers,
+     external, link, cap, globe, users, award, talk, news, book, work,
+     orcid, scholar, wos, researchgate, pubmed, linkedin. */
+
+  var ICONS = {
+    "mail": ["s", "<path d=\"m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7\" /><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\" />"],
+    "phone": ["s", "<path d=\"M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384\" />"],
+    "pin": ["s", "<path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\" /><circle cx=\"12\" cy=\"10\" r=\"3\" />"],
+    "download": ["s", "<path d=\"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z\" /><path d=\"M14 2v5a1 1 0 0 0 1 1h5\" /><path d=\"M12 18v-6\" /><path d=\"m9 15 3 3 3-3\" />"],
+    "clock": ["s", "<circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 6v6l4 2\" />"],
+    "glucose": ["s", "<path d=\"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2\" />"],
+    "baby": ["s", "<path d=\"M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5\" /><path d=\"M15 12h.01\" /><path d=\"M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1\" /><path d=\"M9 12h.01\" />"],
+    "layers": ["s", "<path d=\"M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z\" /><path d=\"M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12\" /><path d=\"M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17\" />"],
+    "external": ["s", "<path d=\"M15 3h6v6\" /><path d=\"M10 14 21 3\" /><path d=\"M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6\" />"],
+    "link": ["s", "<path d=\"M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71\" /><path d=\"M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71\" />"],
+    "cap": ["s", "<path d=\"M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z\" /><path d=\"M22 10v6\" /><path d=\"M6 12.5V16a6 3 0 0 0 12 0v-3.5\" />"],
+    "globe": ["s", "<circle cx=\"12\" cy=\"12\" r=\"10\" /><path d=\"M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20\" /><path d=\"M2 12h20\" />"],
+    "users": ["s", "<path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\" /><path d=\"M16 3.128a4 4 0 0 1 0 7.744\" /><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\" /><circle cx=\"9\" cy=\"7\" r=\"4\" />"],
+    "award": ["s", "<path d=\"m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526\" /><circle cx=\"12\" cy=\"8\" r=\"6\" />"],
+    "talk": ["s", "<path d=\"M12 19v3\" /><path d=\"M19 10v2a7 7 0 0 1-14 0v-2\" /><rect x=\"9\" y=\"2\" width=\"6\" height=\"13\" rx=\"3\" />"],
+    "news": ["s", "<path d=\"M15 18h-5\" /><path d=\"M18 14h-8\" /><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2\" /><rect width=\"8\" height=\"4\" x=\"10\" y=\"6\" rx=\"1\" />"],
+    "book": ["s", "<path d=\"M12 5v16\" /><path d=\"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z\" />"],
+    "work": ["s", "<path d=\"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\" /><rect width=\"20\" height=\"14\" x=\"2\" y=\"6\" rx=\"2\" />"],
+    "orcid": ["f", "<path d=\"M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z\"/>"],
+    "scholar": ["f", "<path d=\"M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z\"/>"],
+    "wos": ["f", "<path d=\"M11.262 18a20.588 20.588 0 0 0 3.246-1.476 20.954 20.954 0 0 0 2.852-2.064A14.46 14.46 0 0 0 19.82 12c.328.328.622.688.884 1.082.328.394.592.786.788 1.18.262.46.524.886.786 1.28.198.458.394.884.59 1.278a23.172 23.172 0 0 1-2.654 2.46 38.765 38.765 0 0 1-2.952 1.966A29.612 29.612 0 0 1 10.574 24l-.788-1.18c-.26-.46-.524-.886-.786-1.28-.209-.42-.406-.846-.59-1.278l-.59-1.376A20.4 20.4 0 0 0 11.26 18h.002zm2.754-16.918a29.61 29.61 0 0 1 3.246 1.574c.984.59 1.968 1.246 2.952 1.966a47.566 47.566 0 0 1 2.654 2.46c-.196.46-.392.886-.59 1.28-.26.458-.524.884-.786 1.278a6.16 6.16 0 0 1-.788 1.18c-.273.409-.568.803-.884 1.18a18.072 18.072 0 0 0-2.46-2.558 20.936 20.936 0 0 0-2.852-2.064 20.4 20.4 0 0 0-6.688-2.36l.59-1.38c.196-.392.394-.82.59-1.278l.786-1.18.788-1.18c1.18.262 2.328.622 3.442 1.082zm-7.574 18c-.524.066-1.016.1-1.474.1H3.492c-.46 0-.92-.034-1.378-.1a34.28 34.28 0 0 1-.786-3.54 32.942 32.942 0 0 1 0-7.18c.196-1.18.46-2.33.786-3.444l1.378-.196h1.476c.46 0 .95.032 1.474.098l1.378.196-.59 1.77c-.262.984-.46 2-.59 3.05-.066.984-.1 2-.1 3.05.066 1.048.198 2.064.394 3.048.262 1.05.558 2.034.886 2.952-.46.13-.92.196-1.378.196z\"/>"],
+    "researchgate": ["f", "<path d=\"M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.123 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.385-.348.664-.638.876-.29.212-.738.35-1.227.35-.545 0-.901-.15-1.21-.353-.306-.203-.517-.454-.67-.915a3.136 3.136 0 0 1-.147-.762 17.366 17.367 0 0 1-.034-.656c-.01-.26-.014-.572-.014-.939a26.401 26.403 0 0 1 .014-.938 15.821 15.822 0 0 1 .035-.656 3.19 3.19 0 0 1 .148-.76 1.89 1.89 0 0 1 .742-1.01c.344-.244.593-.352 1.137-.352.508 0 .815.096 1.144.303.33.207.528.492.764.925.047.094.111.118.198.07l1.044-.43c.075-.048.09-.115.042-.199a3.549 3.549 0 0 0-.466-.742 3 3 0 0 0-.679-.607 3.313 3.313 0 0 0-.903-.41A4.068 4.068 0 0 0 19.586 0zM8.217 5.836c-1.69 0-3.036.086-4.297.086-1.146 0-2.291 0-3.007-.029v.831l1.088.2c.744.144 1.174.488 1.174 2.264v11.288c0 1.777-.43 2.12-1.174 2.263l-1.088.2v.832c.773-.029 2.12-.086 3.465-.086 1.29 0 2.951.057 3.667.086v-.831l-1.49-.2c-.773-.115-1.174-.487-1.174-2.264v-4.784c.688.057 1.29.057 2.206.057 1.748 3.123 3.41 5.472 4.355 6.56.86 1.032 2.177 1.691 3.839 1.691.487 0 1.003-.086 1.318-.23v-.744c-1.031 0-2.063-.716-2.808-1.518-1.26-1.376-2.95-3.582-4.355-6.074 2.32-.545 4.04-2.722 4.04-4.9 0-3.208-2.492-4.698-5.758-4.698zm-.515 1.29c2.406 0 3.839 1.26 3.839 3.552 0 2.263-1.547 3.782-4.097 3.782-.974 0-1.404-.03-2.063-.086v-7.19c.66-.059 1.547-.059 2.32-.059z\"/>"],
+    "pubmed": ["f", "<path d=\"M8.23 7.982l.006-1.005C7.846 1.417 5.096 0 5.096 0l.048 2.291C3.73 1.056 2.6 1.444 2.6 1.444l.118 15.307s4.218-1.796 5.428 5.505C10.238 13.535 21.401 24 21.401 24V9S10.52-.18 8.231 7.982zm9.79 9.941l-1.046-5.232-1.904 4.507h-.96l-1.72-4.301-1.046 5.04H9.321l2.093-9.39h.802l2.491 5.543 2.508-5.557h.869l2.075 9.39h-2.138z\"/>"],
+    "linkedin": ["f", "<path d=\"M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1\" />"]
+  };
+
+  function icon(name, cls) {
+    var i = ICONS[name];
+    if (!i) return "";
+    var paint = i[0] === "s"
+      ? 'fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"'
+      : 'fill="currentColor"';
+    return '<svg class="' + (cls || "icon") + '" viewBox="0 0 24 24" ' + paint + ' aria-hidden="true" focusable="false">' + i[1] + "</svg>";
+  }
+
+  // Picks a brand icon from a profile link's address
+  function linkIcon(l) {
+    if (l.icon) return l.icon;
+    var u = (l.url || "").toLowerCase();
+    if (u.indexOf("orcid.org") > -1) return "orcid";
+    if (u.indexOf("scholar.google") > -1) return "scholar";
+    if (u.indexOf("webofscience") > -1 || u.indexOf("clarivate") > -1 || u.indexOf("publons") > -1) return "wos";
+    if (u.indexOf("linkedin.com") > -1) return "linkedin";
+    if (u.indexOf("researchgate") > -1) return "researchgate";
+    if (u.indexOf("pubmed") > -1 || u.indexOf("ncbi.nlm.nih.gov") > -1) return "pubmed";
+    if (u.indexOf("mailto:") === 0) return "mail";
+    return "link";
+  }
+
+  function iconize() {
+    document.querySelectorAll("[data-icon]").forEach(function (el) {
+      var name = el.getAttribute("data-icon");
+      if (el.classList.contains("theme") || el.classList.contains("theme-detail")) {
+        el.classList.add("has-badge");
+        el.insertAdjacentHTML("afterbegin", '<span class="badge">' + icon(name, "icon") + "</span>");
+      } else {
+        el.insertAdjacentHTML("afterbegin", icon(name, "icon lead"));
+      }
+    });
+  }
+
   /* ---------- Header and footer ---------- */
 
   function header() {
@@ -42,7 +113,7 @@
           "</a>" +
         "</div>" +
         '<div class="menu-row">' +
-          '<a class="menu-email" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + "</a>" +
+          '<a class="menu-email" href="mailto:' + esc(SITE.email) + '">' + icon("mail", "icon lead") + esc(SITE.email) + "</a>" +
           '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>' +
           '<nav class="site-nav" id="site-nav" aria-label="Main"><ul>' + items + "</ul></nav>" +
         "</div>" +
@@ -60,7 +131,7 @@
     var el = $("#site-footer");
     if (!el) return;
     var links = (SITE.links || []).map(function (l) {
-      return '<li><a href="' + esc(l.url) + '" rel="noopener">' + esc(l.label) + "</a></li>";
+      return '<li><a class="with-icon" href="' + esc(l.url) + '" rel="noopener">' + icon(linkIcon(l), "icon lead") + esc(l.label) + "</a></li>";
     }).join("");
     var nav = (SITE.nav || []).map(function (n) {
       return '<li><a href="' + esc(n.file) + '">' + esc(n.label) + "</a></li>";
@@ -70,7 +141,7 @@
         "<div>" +
           '<div class="footer-name">' + esc(SITE.labName) + "</div>" +
           "<p>" + esc(SITE.department) + ", " + esc(SITE.university) + "<br>" + esc(SITE.address) + "</p>" +
-          '<p><a href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + "</a></p>" +
+          '<p><a class="with-icon" href="mailto:' + esc(SITE.email) + '">' + icon("mail", "icon lead") + esc(SITE.email) + "</a></p>" +
         "</div>" +
         "<div><ul>" + nav + "</ul></div>" +
         "<div><ul>" + links + "</ul>" +
@@ -109,7 +180,7 @@
     if (p.showYear) venue += ", " + esc(p.year);
     var type = TYPE_LABEL[p.type] ? '<span class="pub-type">' + TYPE_LABEL[p.type] + ". </span>" : "";
     var link = p.doi
-      ? '<div class="pub-links"><a href="https://doi.org/' + esc(p.doi) + '" rel="noopener">doi:' + esc(p.doi) + "</a></div>"
+      ? '<div class="pub-links"><a href="https://doi.org/' + esc(p.doi) + '" rel="noopener">' + icon("external", "icon lead") + "doi:" + esc(p.doi) + "</a></div>"
       : "";
     return '<li class="pub">' +
       '<div class="pub-title">' + esc(p.title) + "</div>" +
@@ -198,12 +269,12 @@
       return "<dt>" + esc(f.label) + "</dt><dd>" + esc(f.value) + "</dd>";
     }).join("");
     var links = (SITE.links || []).map(function (l) {
-      return '<a href="' + esc(l.url) + '" rel="noopener">' + esc(l.label) + "</a>";
-    }).join(", ");
+      return '<a class="pill" href="' + esc(l.url) + '" rel="noopener">' + icon(linkIcon(l), "icon lead") + esc(l.label) + "</a>";
+    }).join("");
     el.innerHTML = '<div class="pi">' + avatar(pi) +
       "<div><h2>" + esc(pi.name) + '</h2><p class="role">' + esc(pi.role) + "</p>" +
       '<div class="prose">' + (pi.bio || []).map(function (p) { return "<p>" + p + "</p>"; }).join("") + "</div>" +
-      '<dl class="facts">' + facts + (links ? "<dt>Profiles</dt><dd>" + links + "</dd>" : "") + "</dl>" +
+      '<dl class="facts">' + facts + (links ? '<dt>Profiles</dt><dd><div class="pills">' + links + "</div></dd>" : "") + "</dl>" +
       "</div></div>";
   }
 
@@ -266,7 +337,7 @@
     });
     var cv = $("[data-cv-pdf]");
     if (cv) {
-      if (SITE.cvPdf) { cv.hidden = false; cv.href = SITE.cvPdf; }
+      if (SITE.cvPdf) { cv.hidden = false; cv.href = SITE.cvPdf; cv.insertAdjacentHTML("afterbegin", icon("download", "icon lead")); }
       else cv.hidden = true;
     }
     var t = $("[data-teaching-site]");
@@ -394,6 +465,7 @@
   /* ---------- Run ---------- */
 
   window.addEventListener("load", uploadCheck);
+  iconize();
   header();
   footer();
   bindText();
