@@ -46,9 +46,9 @@ window.PEOPLE = {
    
 gallery: [
     { photo: "lab2025.png", caption: "Lab 2025" },
-    { photo: "lab2024.png", caption: "Lab 2024" },
-    { photo: "lab2023.png", caption: "Lab 2023" },
-    { photo: "lab2022.png", caption: "Lab 2022" },
+    { photo: "lab2024.jpg", caption: "Lab 2024" },
+    { photo: "lab2023.jpg", caption: "Lab 2023" },
+    { photo: "lab2022.jpg", caption: "Lab 2022" },
   ],
    
   alumni: [
