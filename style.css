@@ -252,7 +252,7 @@ p:last-child { margin-bottom: 0; }
 }
 .split > header p { color: var(--muted); font-family: var(--sans); font-size: 0.95rem; margin-top: 0.6rem; }
 .split > header a { font-family: var(--sans); font-size: 0.95rem; }
-@media (max-width: 52rem) { .split { grid-template-columns: 1fr; } }
+@media (max-width: 52rem) { .split { grid-template-columns: minmax(0, 1fr); } }
 
 .prose { max-width: 40rem; }
 .prose p { margin-bottom: 1.1em; }
@@ -466,21 +466,47 @@ h3 > .icon.lead { color: var(--night); }
 .site-footer .with-icon { text-decoration: none; display: inline-flex; align-items: center; }
 .site-footer .with-icon:hover { text-decoration: underline; }
 
-/* ---------- Lab photo (Team members page) ---------- */
+/* ---------- Gallery (Team members page) ---------- */
 
-.lab-photo-section { padding-block: 0.5rem clamp(1.5rem, 4vw, 3rem); }
-.lab-photo { margin: 0; }
-.lab-photo img {
-  width: 100%;
-  max-height: 36rem;
-  object-fit: cover;
-  border-radius: 0.5rem;
-  background: var(--surface);
+.gallery {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 42%), 1fr));
+  gap: 1.25rem 1rem;
+  max-width: 44rem;
 }
-.lab-photo figcaption {
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-top: 0.75rem;
+.gallery-item {
+  display: block; width: 100%; padding: 0; border: 0;
+  background: var(--surface); border-radius: 0.4rem; overflow: hidden;
+  cursor: zoom-in;
 }
-.lab-photo-section + .section { padding-top: 0; }
+.gallery-item img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  transition: transform 0.35s ease, opacity 0.2s ease;
+}
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-caption {
+  display: block; margin-top: 0.45rem;
+  font-family: var(--sans); font-size: 0.85rem; line-height: 1.35; color: var(--muted);
+}
+@media (prefers-reduced-motion: reduce) { .gallery-item img { transition: none; } .gallery-item:hover img { transform: none; } }
+
+/* full-size viewer */
+.lightbox {
+  border: 0; padding: 0; background: transparent;
+  max-width: 92vw; max-height: 92vh; overflow: visible;
+}
+.lightbox::backdrop { background: rgba(12, 12, 16, 0.86); }
+.lightbox figure { margin: 0; }
+.lightbox img { max-width: 92vw; max-height: 82vh; width: auto; height: auto; border-radius: 0.4rem; margin: 0 auto; }
+.lightbox figcaption { color: #e8e8ea; font-family: var(--sans); font-size: 0.95rem; text-align: center; margin-top: 0.75rem; }
+.lb-btn {
+  position: fixed; width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer;
+  background: rgba(255, 255, 255, 0.12); color: #fff; border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.lb-btn:hover { background: rgba(255, 255, 255, 0.24); }
+.lb-btn .icon { width: 1.35rem; height: 1.35rem; }
+.lb-close { top: 1rem; right: 1rem; }
+.lb-prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 1rem; top: 50%; transform: translateY(-50%); }

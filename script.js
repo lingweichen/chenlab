@@ -29,7 +29,8 @@
      icon in front of it, e.g. <h3 data-icon="mail">Email</h3>.
      Names: mail, phone, pin, download, clock, glucose, baby, layers,
      external, link, cap, globe, users, award, talk, news, book, work,
-     orcid, scholar, wos, researchgate, pubmed, linkedin. */
+     orcid, scholar, wos, researchgate, pubmed, linkedin,
+     close, prev, next, images. */
 
   var ICONS = {
     "mail": ["s", "<path d=\"m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7\" /><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\" />"],
@@ -55,7 +56,11 @@
     "wos": ["f", "<path d=\"M11.262 18a20.588 20.588 0 0 0 3.246-1.476 20.954 20.954 0 0 0 2.852-2.064A14.46 14.46 0 0 0 19.82 12c.328.328.622.688.884 1.082.328.394.592.786.788 1.18.262.46.524.886.786 1.28.198.458.394.884.59 1.278a23.172 23.172 0 0 1-2.654 2.46 38.765 38.765 0 0 1-2.952 1.966A29.612 29.612 0 0 1 10.574 24l-.788-1.18c-.26-.46-.524-.886-.786-1.28-.209-.42-.406-.846-.59-1.278l-.59-1.376A20.4 20.4 0 0 0 11.26 18h.002zm2.754-16.918a29.61 29.61 0 0 1 3.246 1.574c.984.59 1.968 1.246 2.952 1.966a47.566 47.566 0 0 1 2.654 2.46c-.196.46-.392.886-.59 1.28-.26.458-.524.884-.786 1.278a6.16 6.16 0 0 1-.788 1.18c-.273.409-.568.803-.884 1.18a18.072 18.072 0 0 0-2.46-2.558 20.936 20.936 0 0 0-2.852-2.064 20.4 20.4 0 0 0-6.688-2.36l.59-1.38c.196-.392.394-.82.59-1.278l.786-1.18.788-1.18c1.18.262 2.328.622 3.442 1.082zm-7.574 18c-.524.066-1.016.1-1.474.1H3.492c-.46 0-.92-.034-1.378-.1a34.28 34.28 0 0 1-.786-3.54 32.942 32.942 0 0 1 0-7.18c.196-1.18.46-2.33.786-3.444l1.378-.196h1.476c.46 0 .95.032 1.474.098l1.378.196-.59 1.77c-.262.984-.46 2-.59 3.05-.066.984-.1 2-.1 3.05.066 1.048.198 2.064.394 3.048.262 1.05.558 2.034.886 2.952-.46.13-.92.196-1.378.196z\"/>"],
     "researchgate": ["f", "<path d=\"M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.123 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.141v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.385-.348.664-.638.876-.29.212-.738.35-1.227.35-.545 0-.901-.15-1.21-.353-.306-.203-.517-.454-.67-.915a3.136 3.136 0 0 1-.147-.762 17.366 17.367 0 0 1-.034-.656c-.01-.26-.014-.572-.014-.939a26.401 26.403 0 0 1 .014-.938 15.821 15.822 0 0 1 .035-.656 3.19 3.19 0 0 1 .148-.76 1.89 1.89 0 0 1 .742-1.01c.344-.244.593-.352 1.137-.352.508 0 .815.096 1.144.303.33.207.528.492.764.925.047.094.111.118.198.07l1.044-.43c.075-.048.09-.115.042-.199a3.549 3.549 0 0 0-.466-.742 3 3 0 0 0-.679-.607 3.313 3.313 0 0 0-.903-.41A4.068 4.068 0 0 0 19.586 0zM8.217 5.836c-1.69 0-3.036.086-4.297.086-1.146 0-2.291 0-3.007-.029v.831l1.088.2c.744.144 1.174.488 1.174 2.264v11.288c0 1.777-.43 2.12-1.174 2.263l-1.088.2v.832c.773-.029 2.12-.086 3.465-.086 1.29 0 2.951.057 3.667.086v-.831l-1.49-.2c-.773-.115-1.174-.487-1.174-2.264v-4.784c.688.057 1.29.057 2.206.057 1.748 3.123 3.41 5.472 4.355 6.56.86 1.032 2.177 1.691 3.839 1.691.487 0 1.003-.086 1.318-.23v-.744c-1.031 0-2.063-.716-2.808-1.518-1.26-1.376-2.95-3.582-4.355-6.074 2.32-.545 4.04-2.722 4.04-4.9 0-3.208-2.492-4.698-5.758-4.698zm-.515 1.29c2.406 0 3.839 1.26 3.839 3.552 0 2.263-1.547 3.782-4.097 3.782-.974 0-1.404-.03-2.063-.086v-7.19c.66-.059 1.547-.059 2.32-.059z\"/>"],
     "pubmed": ["f", "<path d=\"M8.23 7.982l.006-1.005C7.846 1.417 5.096 0 5.096 0l.048 2.291C3.73 1.056 2.6 1.444 2.6 1.444l.118 15.307s4.218-1.796 5.428 5.505C10.238 13.535 21.401 24 21.401 24V9S10.52-.18 8.231 7.982zm9.79 9.941l-1.046-5.232-1.904 4.507h-.96l-1.72-4.301-1.046 5.04H9.321l2.093-9.39h.802l2.491 5.543 2.508-5.557h.869l2.075 9.39h-2.138z\"/>"],
-    "linkedin": ["f", "<path d=\"M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1\" />"]
+    "linkedin": ["f", "<path d=\"M17 2a5 5 0 0 1 5 5v10a5 5 0 0 1 -5 5h-10a5 5 0 0 1 -5 -5v-10a5 5 0 0 1 5 -5zm-9 8a1 1 0 0 0 -1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0 -1 -1m6 0a3 3 0 0 0 -1.168 .236l-.125 .057a1 1 0 0 0 -1.707 .707v5a1 1 0 0 0 2 0v-3a1 1 0 0 1 2 0v3a1 1 0 0 0 2 0v-3a3 3 0 0 0 -3 -3m-6 -3a1 1 0 0 0 -.993 .883l-.007 .127a1 1 0 0 0 1.993 .117l.007 -.127a1 1 0 0 0 -1 -1\" />"],
+    "close": ["s", "<path d=\"M18 6 6 18\" /><path d=\"m6 6 12 12\" />"],
+    "prev": ["s", "<path d=\"m15 18-6-6 6-6\" />"],
+    "next": ["s", "<path d=\"m9 18 6-6-6-6\" />"],
+    "images": ["s", "<path d=\"m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16\" /><path d=\"M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2\" /><circle cx=\"13\" cy=\"7\" r=\"1\" fill=\"currentColor\" /><rect x=\"8\" y=\"2\" width=\"14\" height=\"14\" rx=\"2\" />"]
   };
 
   function icon(name, cls) {
@@ -262,13 +267,69 @@
     return '<div class="monogram' + cls + '" aria-hidden="true">' + esc(initials(person.name)) + "</div>";
   }
 
-  function renderGroupPhoto(el) {
+  /* ---------- Gallery (Team members page) ---------- */
+
+  function galleryItems() {
     var P = window.PEOPLE || {};
-    if (!P.groupPhoto) return;
-    el.querySelector(".lab-photo").innerHTML =
-      '<img src="' + esc(P.groupPhoto) + '" alt="' + esc(P.groupCaption || "The research group") + '">' +
-      (P.groupCaption ? "<figcaption>" + esc(P.groupCaption) + "</figcaption>" : "");
-    el.hidden = false;
+    var items = (P.gallery || []).filter(function (g) { return g && g.photo; });
+    // older setting: a single groupPhoto still works
+    if (!items.length && P.groupPhoto) items = [{ photo: P.groupPhoto, caption: P.groupCaption || "" }];
+    return items;
+  }
+
+  function renderGallery(el) {
+    var items = galleryItems();
+    var section = el.closest("section");
+    if (!items.length) { if (section) section.hidden = true; return; }
+    if (section) section.hidden = false;
+
+    el.innerHTML = items.map(function (g, i) {
+      return '<li><button type="button" class="gallery-item" data-index="' + i + '" aria-label="Open photo: ' + esc(g.caption || "photo " + (i + 1)) + '">' +
+        '<img src="' + esc(g.photo) + '" alt="' + esc(g.caption || "") + '" loading="lazy">' +
+        "</button>" +
+        (g.caption ? '<span class="gallery-caption">' + esc(g.caption) + "</span>" : "") +
+        "</li>";
+    }).join("");
+
+    // full-size viewer
+    var box = document.createElement("dialog");
+    box.className = "lightbox";
+    box.innerHTML =
+      '<figure><img alt=""><figcaption></figcaption></figure>' +
+      '<button type="button" class="lb-btn lb-close" aria-label="Close">' + icon("close", "icon") + "</button>" +
+      (items.length > 1
+        ? '<button type="button" class="lb-btn lb-prev" aria-label="Previous photo">' + icon("prev", "icon") + "</button>" +
+          '<button type="button" class="lb-btn lb-next" aria-label="Next photo">' + icon("next", "icon") + "</button>"
+        : "");
+    document.body.appendChild(box);
+    var img = box.querySelector("img"), cap = box.querySelector("figcaption"), cur = 0;
+
+    function show(i) {
+      cur = (i + items.length) % items.length;
+      img.src = items[cur].photo;
+      img.alt = items[cur].caption || "";
+      cap.textContent = items[cur].caption || "";
+      cap.hidden = !items[cur].caption;
+    }
+    function open(i) {
+      show(i);
+      if (box.showModal) box.showModal(); else box.setAttribute("open", "");
+    }
+    function close() { if (box.close) box.close(); else box.removeAttribute("open"); }
+
+    el.addEventListener("click", function (e) {
+      var b = e.target.closest(".gallery-item");
+      if (b) open(parseInt(b.getAttribute("data-index"), 10));
+    });
+    box.querySelector(".lb-close").addEventListener("click", close);
+    var p = box.querySelector(".lb-prev"), n = box.querySelector(".lb-next");
+    if (p) p.addEventListener("click", function () { show(cur - 1); });
+    if (n) n.addEventListener("click", function () { show(cur + 1); });
+    box.addEventListener("click", function (e) { if (e.target === box) close(); });
+    box.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") show(cur - 1);
+      if (e.key === "ArrowRight") show(cur + 1);
+    });
   }
 
   function renderPI(el) {
@@ -484,7 +545,7 @@
       news: renderNews,
       selected: renderSelected,
       publications: renderPublications,
-      groupphoto: renderGroupPhoto,
+      gallery: renderGallery,
       pi: renderPI,
       members: renderMembers,
       alumni: renderAlumni,

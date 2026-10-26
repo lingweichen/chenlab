@@ -6,9 +6,11 @@
    "note" and "topic" are optional.
    Move people from "members" to "alumni" when they graduate.
 
-   LAB PHOTO: upload a group photo next to index.html and write its
-   name in groupPhoto. It appears wide across the top of the Team
-   members page. groupCaption is optional. "" hides it.
+   GALLERY: upload photos next to index.html and list them under
+   gallery (at the bottom of this file). They appear as small
+   thumbnails at the end of the Team members page; clicking one
+   opens it full size. The caption is optional. With an empty list,
+   the gallery is hidden.
    =========================================================== */
 
 window.PEOPLE = {
@@ -42,10 +44,6 @@ window.PEOPLE = {
     { name: "Hsuan-Yu Yeh", role: "Master’s student (co-supervised)", years: "2025–" }
   ],
 
-  groupPhoto: "lab2025.png",
-  groupCaption: "Lab outing 2025",
-  groupPhotoWidth: 450,
-   
   alumni: [
     { name: "Ya-Hsuan He", role: "Master’s", years: "2024–2026", thesis: "Associations of early-pregnancy dietary quality with glycemic parameters among pregnant women" },
     { name: "Jia-Hui Wu", role: "Master’s", years: "2023–2026", thesis: "Associations of dietary glycemic index and load with glycemia during pregnancy" },
@@ -53,5 +51,9 @@ window.PEOPLE = {
     { name: "Yi-Wen Tsai", role: "Master’s (co-supervised)", years: "2023–2025", thesis: "The effect of mosquito breeding source elimination on dengue vector indexes and hot spots in Beitou District" },
     { name: "Hui-Li Tsai", role: "Master’s", years: "2021–2023", thesis: "Intermittent fasting and metabolic health: an umbrella review and network meta-analysis" },
     { name: "Ting-I Lee", role: "Master’s (co-supervised)", years: "2021–2023", thesis: "Associations of diet quality with cognitive frailty in community-dwelling older adults" }
+  ],
+
+  gallery: [
+    { photo: "lab2025.png", caption: "Lab outing 2025" }
   ]
 };
