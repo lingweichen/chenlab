@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications | Ling-Wei Chen</title>
+  <meta name="description" content="Publications by Ling-Wei Chen on maternal diet, chrono-nutrition and gestational diabetes.">
+  <meta name="theme-color" content="#f0f0ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15161a" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main id="main">
+    <section class="page-head">
+      <div class="wrap">
+        <h1>Publications</h1>
+        <p class="lede"><span data-site="metrics.publications"></span> peer-reviewed publications, cited <span data-site="metrics.citations"></span> times (h-index <span data-site="metrics.hIndex"></span>, <span data-site="metrics.source"></span>, <span data-site="metrics.asOf"></span>). An asterisk marks the corresponding author.</p>
+      </div>
+    </section>
+    <section class="section" data-render="publications">
+      <div class="wrap">
+        <div class="pub-tools">
+          <input class="search" type="search" placeholder="Search titles, authors, journals" aria-label="Search publications" data-pub-search>
+          <div class="segmented" role="group" aria-label="Type">
+            <button type="button" data-pub-type="all" aria-pressed="true">All</button>
+            <button type="button" data-pub-type="article" aria-pressed="false">Articles</button>
+            <button type="button" data-pub-type="editorial" aria-pressed="false">Editorials</button>
+            <button type="button" data-pub-type="letter" aria-pressed="false">Commentaries</button>
+            <button type="button" data-pub-type="chapter" aria-pressed="false">Chapters</button>
+          </div>
+          <label class="check"><input type="checkbox" data-pub-led> First or corresponding author</label>
+        </div>
+        <p class="pub-count" data-pub-count aria-live="polite"></p>
+        <div data-pub-list></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Your content is in the content-*.js files; script.js puts it on the page -->
+  <script src="content-site.js"></script>
+  <script src="content-news.js"></script>
+  <script src="content-publications.js"></script>
+  <script src="content-people.js"></script>
+  <script src="content-grants.js"></script>
+  <script src="content-cv.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
