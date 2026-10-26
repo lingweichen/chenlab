@@ -25,6 +25,7 @@
     </section>
     <section class="section" data-render="publications">
       <div class="wrap">
+        <figure class="pub-chart" data-pub-chart></figure>
         <div class="pub-tools">
           <input class="search" type="search" placeholder="Search titles, authors, journals" aria-label="Search publications" data-pub-search>
           <div class="segmented" role="group" aria-label="Type">
@@ -36,7 +37,17 @@
           </div>
           <label class="check"><input type="checkbox" data-pub-led> First or corresponding author</label>
         </div>
-        <p class="pub-count" data-pub-count aria-live="polite"></p>
+        <div class="theme-chips" role="group" aria-label="Theme" data-pub-themes></div>
+        <div class="pub-meta">
+          <p class="pub-count" data-pub-count aria-live="polite"></p>
+          <div class="group-toggle" role="group" aria-label="Group by">
+            <span>Group by</span>
+            <div class="segmented">
+              <button type="button" data-pub-group="theme" aria-pressed="true">Theme</button>
+              <button type="button" data-pub-group="year" aria-pressed="false">Year</button>
+            </div>
+          </div>
+        </div>
         <div data-pub-list></div>
       </div>
     </section>

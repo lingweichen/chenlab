@@ -2,21 +2,26 @@
    CV
    The short CV shown on the CV page. Newest first in each list.
    For the full CV, add a PDF and set cvPdf in content-site.js.
+
+   CAREER JOURNEY: the timeline at the top of the CV page is built
+   from positions and education entries that have "country".
+   "short" and "where" are the labels on the timeline. Add
+   journey: false to leave an entry off the timeline.
    =========================================================== */
 
 window.CV = {
   positions: [
-    { years: "2025–", title: "Associate Professor", place: "Institute of Epidemiology and Preventive Medicine, College of Public Health, National Taiwan University" },
-    { years: "2021–2025", title: "Assistant Professor", place: "Institute of Epidemiology and Preventive Medicine, College of Public Health, National Taiwan University" },
-    { years: "2021–2025", title: "Adjunct Research Scientist", place: "Singapore Institute for Clinical Sciences, A*STAR, Singapore" },
-    { years: "2020–2021", title: "Research Scientist in Women’s Health", place: "Singapore Institute for Clinical Sciences, A*STAR, Singapore" },
-    { years: "2017–2019", title: "Postdoctoral Research Fellow in Early Life Programming", place: "University College Dublin, Ireland" },
-    { years: "2015–2017", title: "Research Fellow in Child Growth and Body Composition", place: "Department of Paediatrics, National University of Singapore" }
+    { years: "2025–", title: "Associate Professor", short: "Associate Professor", where: "National Taiwan University", country: "Taiwan", place: "Institute of Epidemiology and Preventive Medicine, College of Public Health, National Taiwan University" },
+    { years: "2021–2025", title: "Assistant Professor", short: "Assistant Professor", where: "National Taiwan University", country: "Taiwan", place: "Institute of Epidemiology and Preventive Medicine, College of Public Health, National Taiwan University" },
+    { years: "2021–2025", title: "Adjunct Research Scientist", journey: false, place: "Singapore Institute for Clinical Sciences, A*STAR, Singapore" },
+    { years: "2020–2021", title: "Research Scientist in Women’s Health", short: "Research Scientist", where: "A*STAR, Singapore", country: "Singapore", place: "Singapore Institute for Clinical Sciences, A*STAR, Singapore" },
+    { years: "2017–2019", title: "Postdoctoral Research Fellow in Early Life Programming", short: "Postdoctoral Fellow", where: "University College Dublin", country: "Ireland", place: "University College Dublin, Ireland" },
+    { years: "2015–2017", title: "Research Fellow in Child Growth and Body Composition", short: "Research Fellow", where: "National University of Singapore", country: "Singapore", place: "Department of Paediatrics, National University of Singapore" }
   ],
 
   education: [
-    { years: "2010–2014", title: "PhD in Epidemiology", place: "Saw Swee Hock School of Public Health, National University of Singapore" },
-    { years: "2006–2010", title: "BSc (First Class Honours) in Life Sciences", place: "Faculty of Science, National University of Singapore" }
+    { years: "2010–2014", title: "PhD in Epidemiology", short: "PhD, Epidemiology", where: "National University of Singapore", country: "Singapore", place: "Saw Swee Hock School of Public Health, National University of Singapore" },
+    { years: "2006–2010", title: "BSc (First Class Honours) in Life Sciences", short: "BSc, Life Sciences", where: "National University of Singapore", country: "Singapore", place: "Faculty of Science, National University of Singapore" }
   ],
 
   awards: [

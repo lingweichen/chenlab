@@ -33,6 +33,7 @@ After an upload, wait a minute and refresh with Ctrl+Shift+R
 | Research themes, cohorts, methods            | `research.html`            |
 | Home-page headline and “What we study”       | `index.html`               |
 | Courses and further reading                  | `news.html`                |
+| Map places on the Research page              | `content-map.js`           |
 | Colours and fonts                            | `style.css` (top of file)  |
 
 You won’t need to touch `script.js`.
@@ -65,6 +66,16 @@ GitHub keeps every version, so any mistake can be undone.
   `cvPdf: "CV_Ling-Wei_Chen.pdf"` in `content-site.js`.
 - **Link your teaching site:** paste its address into `teachingSite` in
   `content-site.js`.
+
+## Visualizations
+
+- **Publications chart** (Publications page) updates itself from
+  `content-publications.js`. Click a bar to list that year’s papers.
+- **Map** (Research page): edit the places in `content-map.js`.
+- **Career journey** (CV page) is built from entries in `content-cv.js`
+  that have a `country`. `short` and `where` are the timeline labels;
+  `journey: false` leaves an entry off.
+- **Eating-window explainer** (Research page) needs no editing.
 
 ## Icons
 
