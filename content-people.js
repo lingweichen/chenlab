@@ -13,8 +13,8 @@ window.PEOPLE = {
     role: "Associate Professor and Principal Investigator",
     photo: "",
     bio: [
-      "Ling-Wei Chen is a nutritional and perinatal epidemiologist. Her research asks how diet and its timing before, during and after pregnancy shape the metabolic health of mothers and their children, with a focus on chrono-nutrition, gestational diabetes and continuous glucose monitoring.",
-      "He trained at the National University of Singapore (BSc, first-class honours; PhD in Epidemiology, President’s Graduate Fellow), then worked as a research fellow at NUS Paediatrics and as a postdoctoral fellow at University College Dublin, where she led a work package on growth and cardiometabolic health in the EU-funded ALPHABET consortium. She was a research scientist at A*STAR’s Singapore Institute for Clinical Sciences before joining National Taiwan University in 2021.",
+      "Ling-Wei Chen is a nutritional and perinatal epidemiologist. His research asks how diet and its timing before, during and after pregnancy shape the metabolic health of mothers and their children, with a focus on chrono-nutrition, gestational diabetes and continuous glucose monitoring.",
+      "He trained at the National University of Singapore (BSc, first-class honours; PhD in Epidemiology, President’s Graduate Fellow), then worked as a research fellow at NUS Paediatrics and as a postdoctoral fellow at University College Dublin, where he co-led a work package on growth and cardiometabolic health in the EU-funded ALPHABET consortium. He was a research scientist at A*STAR’s Singapore Institute for Clinical Sciences before joining National Taiwan University in 2021.",
       "He has published more than 60 peer-reviewed papers and serves as an Editorial Board Member of <em>BMC Medicine</em>."
     ],
     facts: [
@@ -28,6 +28,7 @@ window.PEOPLE = {
     { name: "Yu-En Chen", role: "PhD student", years: "2023–", note: "Registered dietitian", topic: "Chrono-nutrition, intermittent fasting and glycemia in pregnancy" },
     { name: "Wei-Jiun Li, MD", role: "Master’s student", years: "2023–" },
     { name: "Ting-Wei Ho", role: "Master’s student", years: "2024–" },
+    { name: "Bing-Han Lin", role: "Master’s student", years: "2025–" },
     { name: "Chen-Yu Lee", role: "Master’s student", years: "2025–" },
     { name: "Joi-Chi Su", role: "Master’s student", years: "2025–" },
     { name: "Shih-Ming Chiu", role: "Master’s student", years: "2025–" },
