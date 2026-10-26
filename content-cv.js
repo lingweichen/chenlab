@@ -34,7 +34,7 @@ window.CV = {
     { years: "2023–", title: "Editorial Board Member, BMC Medicine" },
     { years: "2020–2026", title: "Editorial Board Member, BMC Pediatrics" },
     { years: "2018–2023", title: "Guest Editor, Frontiers in Nutrition and Nutrients (three special issues)" },
-    { years: "2021–2025", title: "Grant reviewer: UKRI/MRC (UK), Foundation for Science and Technology panel (Portugal), Austrian Science Fund" }
+    { years: "2021–2026", title: "Grant reviewer: Foundation for Science and Technology (Portugal; Review Panel Member), UKRI/MRC (UK; ad hoc), NMRC (Singapore; ad hoc), Austrian Science Fund (Austria; ad hoc)" }
   ],
 
   Invited talks: [
