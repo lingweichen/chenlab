@@ -5,8 +5,8 @@
    =========================================================== */
 
 window.SITE = {
-  labName: "Ling-Wei Chen",
-  tagline: "Research in Context",
+  labName: "Chen lab",
+  tagline: "Diet, Meal Timing and Metabolic Health",
   piName: "Ling-Wei Chen",
   university: "National Taiwan University",
   department: "Institute of Epidemiology and Preventive Medicine, College of Public Health",
