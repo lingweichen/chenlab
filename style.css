@@ -682,3 +682,7 @@ h3 > .icon.lead { color: var(--night); }
   .meal-dot { transition: none; }
   .hero h1, .hero .lede, .hero .actions, .dial-figure figcaption, .dial-key, .dial-figure .dial { animation: none; }
 }
+
+/* menu centred under the name (no email on the left) */
+.menu-row { justify-content: center; }
+@media (max-width: 60rem) { .menu-row { justify-content: flex-end; } }

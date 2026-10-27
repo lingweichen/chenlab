@@ -119,7 +119,6 @@
           "</a>" +
         "</div>" +
         '<div class="menu-row">' +
-          '<a class="menu-email" href="mailto:' + esc(SITE.email) + '">' + icon("mail", "icon lead") + esc(SITE.email) + "</a>" +
           '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>' +
           '<nav class="site-nav" id="site-nav" aria-label="Main"><ul>' + items + "</ul></nav>" +
         "</div>" +
@@ -147,7 +146,6 @@
         "<div>" +
           '<div class="footer-name">' + esc(SITE.labName) + "</div>" +
           "<p>" + esc(SITE.department) + ", " + esc(SITE.university) + "<br>" + esc(SITE.address) + "</p>" +
-          '<p><a class="with-icon" href="mailto:' + esc(SITE.email) + '">' + icon("mail", "icon lead") + esc(SITE.email) + "</a></p>" +
         "</div>" +
         "<div><ul>" + nav + "</ul></div>" +
         "<div><ul>" + links + "</ul>" +
@@ -707,6 +705,10 @@
     update();
   }
 
+  // The email can be written as "name [at] domain" in content-site.js,
+  // which hides it from simple spam robots; it is joined up here.
+  function emailAddress() { return String(SITE.email || "").replace(/\s*\[at\]\s*/i, "@").replace(/\s+/g, ""); }
+
   /* ---------- Small bindings ---------- */
 
   function bindText() {
@@ -714,11 +716,12 @@
       var path = el.getAttribute("data-site").split(".");
       var v = SITE;
       path.forEach(function (k) { v = v == null ? v : v[k]; });
+      if (path[0] === "email") v = emailAddress();
       if (v != null) el.textContent = v;
     });
     document.querySelectorAll("[data-site-href]").forEach(function (el) {
       var key = el.getAttribute("data-site-href");
-      if (key === "email") el.href = "mailto:" + SITE.email;
+      if (key === "email") el.href = "mailto:" + emailAddress();
       else if (SITE[key]) el.href = SITE[key];
     });
     var cv = $("[data-cv-pdf]");
