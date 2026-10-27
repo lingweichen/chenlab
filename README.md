@@ -69,8 +69,12 @@ GitHub keeps every version, so any mistake can be undone.
 
 ## Visualizations
 
-- **Publications chart** (Publications page) updates itself from
-  `content-publications.js`. Click a bar to list that year’s papers.
+- **Home-page clock** plays a 24-hour animation when the page opens and
+  replays when clicked. Visitors who turn off animations see it still.
+- **Citations** on the Publications page are fetched live from OpenAlex
+  (openalex.org) and refresh daily. They are usually lower than Google
+  Scholar. PubMed and free full-text links use the `pmid` and `pmcid`
+  fields; when those are empty, the PubMed link searches by DOI.
 - **Map** (Research page): edit the places in `content-map.js`.
 - **Career journey** (CV page) is built from entries in `content-cv.js`
   that have a `country`. `short` and `where` are the timeline labels;

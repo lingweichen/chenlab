@@ -20,12 +20,11 @@
     <section class="page-head">
       <div class="wrap">
         <h1>Publications</h1>
-        <p class="lede"><span data-site="metrics.publications"></span> peer-reviewed publications, cited <span data-site="metrics.citations"></span> times (h-index <span data-site="metrics.hIndex"></span>, <span data-site="metrics.source"></span>, <span data-site="metrics.asOf"></span>). An asterisk marks the corresponding author.</p>
+        <p class="lede"><span data-site="metrics.publications"></span> peer-reviewed publications, cited <span data-site="metrics.citations"></span> times (h-index <span data-site="metrics.hIndex"></span>, <span data-site="metrics.source"></span>, <span data-site="metrics.asOf"></span>). An asterisk marks the corresponding author. Citation counts per paper come from OpenAlex and update automatically.</p>
       </div>
     </section>
     <section class="section" data-render="publications">
       <div class="wrap">
-        <figure class="pub-chart" data-pub-chart></figure>
         <div class="pub-tools">
           <input class="search" type="search" placeholder="Search titles, authors, journals" aria-label="Search publications" data-pub-search>
           <div class="segmented" role="group" aria-label="Type">
@@ -45,6 +44,7 @@
             <div class="segmented">
               <button type="button" data-pub-group="theme" aria-pressed="true">Theme</button>
               <button type="button" data-pub-group="year" aria-pressed="false">Year</button>
+              <button type="button" data-pub-group="cited" aria-pressed="false">Most cited</button>
             </div>
           </div>
         </div>

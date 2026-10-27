@@ -60,7 +60,8 @@
     "close": ["s", "<path d=\"M18 6 6 18\" /><path d=\"m6 6 12 12\" />"],
     "prev": ["s", "<path d=\"m15 18-6-6 6-6\" />"],
     "next": ["s", "<path d=\"m9 18 6-6-6-6\" />"],
-    "images": ["s", "<path d=\"m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16\" /><path d=\"M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2\" /><circle cx=\"13\" cy=\"7\" r=\"1\" fill=\"currentColor\" /><rect x=\"8\" y=\"2\" width=\"14\" height=\"14\" rx=\"2\" />"]
+    "images": ["s", "<path d=\"m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16\" /><path d=\"M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2\" /><circle cx=\"13\" cy=\"7\" r=\"1\" fill=\"currentColor\" /><rect x=\"8\" y=\"2\" width=\"14\" height=\"14\" rx=\"2\" />"],
+    "quote": ["s", "<path d=\"M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z\" /><path d=\"M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z\" />"]
   };
 
   function icon(name, cls) {
@@ -180,26 +181,69 @@
     return esc(a).split(esc(NAME)).join("<strong>" + esc(NAME) + "</strong>");
   }
 
+  /* Citation counts are fetched live from OpenAlex (openalex.org),
+     a free index of scholarly works, and kept for a day in the
+     visitor's browser. Counts are usually lower than Google Scholar. */
+  var CITES = null, citeWaiters = [];
+  function doiKey(d) { return String(d || "").toLowerCase().replace(/^https?:\/\/doi\.org\//, ""); }
+  function citesFor(p) { return CITES && p.doi ? CITES[doiKey(p.doi)] : null; }
+
+  function loadCitations(done) {
+    if (done) citeWaiters.push(done);
+    if (loadCitations.started) { if (CITES && done) done(); return; }
+    loadCitations.started = true;
+    var KEY = "openalex-cites-v1";
+    try {
+      var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (saved && Date.now() - saved.t < 864e5) { CITES = saved.d; citeWaiters.forEach(function (f) { f(); }); return; }
+    } catch (e) {}
+    var dois = (window.PUBLICATIONS || []).filter(function (p) { return p.doi; }).map(function (p) { return doiKey(p.doi); });
+    var chunks = [];
+    for (var i = 0; i < dois.length; i += 50) chunks.push(dois.slice(i, i + 50));
+    var map = {};
+    Promise.all(chunks.map(function (c) {
+      var url = "https://api.openalex.org/works?per-page=100&select=doi,cited_by_count,ids&filter=doi:" + encodeURIComponent(c.join("|"));
+      return fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (data) {
+        (data.results || []).forEach(function (w) {
+          var pm = w.ids && w.ids.pmid ? String(w.ids.pmid).replace(/\D/g, "") : null;
+          map[doiKey(w.doi)] = { n: w.cited_by_count || 0, pmid: pm };
+        });
+      });
+    })).then(function () {
+      CITES = map;
+      try { localStorage.setItem(KEY, JSON.stringify({ t: Date.now(), d: map })); } catch (e) {}
+      citeWaiters.forEach(function (f) { f(); });
+    }).catch(function () { /* offline or blocked: links still work, counts stay hidden */ });
+  }
+
   function pubHTML(p) {
     var venue = "<em>" + esc(p.journal) + "</em>" + (p.details ? ", " + esc(p.details) : "");
     if (p.showYear) venue += ", " + esc(p.year);
     var type = TYPE_LABEL[p.type] ? '<span class="pub-type">' + TYPE_LABEL[p.type] + ". </span>" : "";
-    var link = p.doi
-      ? '<div class="pub-links"><a href="https://doi.org/' + esc(p.doi) + '" rel="noopener">' + icon("external", "icon lead") + "doi:" + esc(p.doi) + "</a></div>"
-      : "";
+    var c = citesFor(p);
+    var pmid = p.pmid || (c && c.pmid);
+    var links = [];
+    if (p.doi) links.push('<a href="https://doi.org/' + esc(p.doi) + '" rel="noopener">' + icon("external", "icon lead") + "DOI</a>");
+    if (pmid) links.push('<a href="https://pubmed.ncbi.nlm.nih.gov/' + esc(pmid) + '/" rel="noopener">' + icon("pubmed", "icon lead") + "PubMed</a>");
+    else if (p.doi) links.push('<a href="https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(p.doi + "[doi]") + '" rel="noopener">' + icon("pubmed", "icon lead") + "PubMed</a>");
+    else if (p.type === "article" || p.type === "editorial" || p.type === "letter") links.push('<a href="https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(p.title + "[ti]") + '" rel="noopener">' + icon("pubmed", "icon lead") + "PubMed</a>");
+    if (p.pmcid) links.push('<a href="https://pmc.ncbi.nlm.nih.gov/articles/' + esc(p.pmcid) + '/" rel="noopener">' + icon("book", "icon lead") + "Free full text</a>");
+    if (c && c.n > 0) links.push('<span class="cites" title="Citations counted by OpenAlex">' + icon("quote", "icon lead") + "Cited by " + c.n + "</span>");
     return '<li class="pub">' +
       '<div class="pub-title">' + esc(p.title) + "</div>" +
       '<div class="pub-authors">' + authorsHTML(p.authors) + "</div>" +
       '<div class="pub-venue">' + type + venue + "</div>" +
-      link + "</li>";
+      (links.length ? '<div class="pub-links">' + links.join("") + "</div>" : "") + "</li>";
   }
 
   function renderSelected(el) {
     var limit = parseInt(el.getAttribute("data-limit") || "4", 10);
     var items = (window.PUBLICATIONS || []).filter(function (p) { return p.selected; }).slice(0, limit);
-    el.innerHTML = items.map(function (p) {
-      return pubHTML(Object.assign({}, p, { showYear: true }));
-    }).join("");
+    function draw() {
+      el.innerHTML = items.map(function (p) { return pubHTML(Object.assign({}, p, { showYear: true })); }).join("");
+    }
+    draw();
+    loadCitations(draw);
   }
 
   function themeList() { return window.PUB_THEMES || []; }
@@ -307,6 +351,16 @@
         return;
       }
 
+      if (state.group === "cited") {
+        if (!CITES) { list.innerHTML = '<p class="empty">Citation counts are loading. If they don’t appear, the citation service may be unavailable right now.</p>'; return; }
+        var ranked = shown.slice().sort(function (a, b) {
+          var ca = (citesFor(a) || {}).n || 0, cb = (citesFor(b) || {}).n || 0;
+          return cb - ca || b.year - a.year;
+        });
+        list.innerHTML = '<section class="theme-group"><ol class="pubs ranked">' + ranked.map(function (p) { return item(p, true); }).join("") + "</ol></section>";
+        return;
+      }
+
       if (state.group === "theme") {
         var keys = state.theme === "all" ? themes.map(function (t) { return t.key; }) : [state.theme];
         var html = keys.map(function (k) {
@@ -363,6 +417,7 @@
         draw();
       });
     });
+    loadCitations(draw);
     if (chips) chips.addEventListener("click", function (e) {
       var b = e.target.closest("[data-theme-chip]");
       if (b) setTheme(b.getAttribute("data-theme-chip"));
@@ -685,6 +740,7 @@
     var C = 200, R = 150;
     var meals = [8, 13, 19];         // breakfast, lunch, dinner
     var eatStart = 8, eatEnd = 19;   // eating window
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function pt(h, r) {
       var a = (h / 24) * Math.PI * 2 - Math.PI / 2;
@@ -696,80 +752,166 @@
       return "M" + s[0].toFixed(2) + " " + s[1].toFixed(2) +
         " A" + r + " " + r + " 0 " + large + " 1 " + e[0].toFixed(2) + " " + e[1].toFixed(2);
     }
-    function node(tag, attrs) {
+    function node(tag, attrs, parent) {
       var n = document.createElementNS(NS, tag);
       for (var k in attrs) n.setAttribute(k, attrs[k]);
+      if (parent) parent.appendChild(n);
       return n;
     }
+    function fmt(h) {
+      h = ((h % 24) + 24) % 24;
+      var hh = Math.floor(h), mm = Math.floor((h - hh) * 60);
+      return (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
+    }
 
+    // An illustrative glucose curve: a rise after each meal and a small
+    // early-morning rise, drawn inside the clock face.
+    function glucose(t) {
+      var g = 5.0 + 0.35 * Math.exp(-Math.pow(t - 6, 2) / 2);
+      [[8, 2.1], [13, 1.8], [19, 2.5]].forEach(function (m) {
+        for (var k = -1; k <= 0; k++) {
+          var x = t - m[0] - k * 24;
+          if (x > 0) g += m[1] * (x / 0.8) * Math.exp(1 - x / 0.8);
+        }
+      });
+      return g;
+    }
+    function glucosePath() {
+      var d = "", area = "";
+      for (var i = 0; i <= 288; i++) {
+        var t = i / 12, r = 60 + (glucose(t) - 4.9) * 10.5, p = pt(t, r);
+        d += (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1);
+      }
+      area = d;
+      for (i = 288; i >= 0; i--) { var q = pt(i / 12, 60); area += "L" + q[0].toFixed(1) + " " + q[1].toFixed(1); }
+      return { line: d, area: area + "Z" };
+    }
+
+    var uid = "dial" + Math.floor(Math.random() * 1e6);
     var svg = node("svg", { viewBox: "0 0 400 400", class: "dial", role: "img", style: "max-width:25rem;width:100%",
-      "aria-label": "A 24-hour clock showing daylight from 6:00 to 18:00, an eating window from 8:00 to 19:00 with three meals, and the current time in " + (SITE.city || "Taipei") });
+      "aria-label": "Animated 24-hour clock: daylight from 6:00 to 18:00, an eating window from 8:00 to 19:00 with three meals, an illustrative glucose curve rising after each meal, and the current time in " + (SITE.city || "Taipei") });
+    var defs = node("defs", {}, svg);
+    var clip = node("clipPath", { id: uid }, defs);
+    var wedge = node("path", { d: "" }, clip);
 
-    // light and dark bands
-    svg.appendChild(node("path", { d: arc(6, 18, R + 22), fill: "none", stroke: "var(--day-soft)", "stroke-width": 18 }));
-    svg.appendChild(node("path", { d: arc(18, 30, R + 22), fill: "none", stroke: "var(--night-soft)", "stroke-width": 18 }));
+    var bands = node("g", { class: "dial-bands" }, svg);
+    node("path", { d: arc(6, 18, R + 22), fill: "none", stroke: "var(--day-soft)", "stroke-width": 18 }, bands);
+    node("path", { d: arc(18, 30, R + 22), fill: "none", stroke: "var(--night-soft)", "stroke-width": 18 }, bands);
 
-    // hour ticks
     for (var h = 0; h < 24; h++) {
       var major = h % 6 === 0;
       var a = pt(h, R - 10), b = pt(h, R - (major ? 22 : 15));
-      svg.appendChild(node("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1],
-        stroke: major ? "var(--ink)" : "var(--muted)", "stroke-width": major ? 1.6 : 1, opacity: major ? 1 : 0.55 }));
+      node("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1],
+        stroke: major ? "var(--ink)" : "var(--muted)", "stroke-width": major ? 1.6 : 1, opacity: major ? 1 : 0.55 }, svg);
     }
     [0, 6, 12, 18].forEach(function (hh) {
-      var p = pt(hh, hh % 12 === 0 ? R - 38 : R - 52);
+      var p = pt(hh, hh % 12 === 0 ? R - 38 : R - 54);
       var t = node("text", { x: p[0], y: p[1], "text-anchor": "middle", "dominant-baseline": "central",
-        fill: "var(--muted)", "font-size": 12.5, "font-family": "var(--sans)", style: "font-variant-numeric: tabular-nums" });
+        fill: "var(--muted)", "font-size": 12.5, "font-family": "var(--sans)", style: "font-variant-numeric: tabular-nums" }, svg);
       t.textContent = (hh < 10 ? "0" : "") + hh + ":00";
-      svg.appendChild(t);
     });
 
-    // fasting (dotted) and eating (solid) on the main ring
-    svg.appendChild(node("path", { d: arc(eatEnd, eatStart + 24, R), fill: "none", stroke: "var(--muted)",
-      "stroke-width": 1.5, "stroke-dasharray": "1 6", "stroke-linecap": "round" }));
-    var eat = node("path", { d: arc(eatStart, eatEnd, R), fill: "none", stroke: "var(--ink)",
-      "stroke-width": 3, "stroke-linecap": "round", class: "eat-arc" });
-    svg.appendChild(eat);
+    // everything that the sweeping hand reveals
+    var data = node("g", { "clip-path": "url(#" + uid + ")" }, svg);
+    var gp = glucosePath();
+    node("circle", { cx: C, cy: C, r: 60, fill: "none", stroke: "var(--rule)", "stroke-width": 1, "stroke-dasharray": "2 4" }, data);
+    node("path", { d: gp.area, fill: "var(--day-soft)", opacity: 0.55 }, data);
+    node("path", { d: gp.line, fill: "none", stroke: "var(--day)", "stroke-width": 2.2, "stroke-linejoin": "round", "stroke-linecap": "round" }, data);
+    node("path", { d: arc(eatEnd, eatStart + 24, R), fill: "none", stroke: "var(--muted)",
+      "stroke-width": 1.5, "stroke-dasharray": "1 6", "stroke-linecap": "round" }, data);
+    node("path", { d: arc(eatStart, eatEnd, R), fill: "none", stroke: "var(--ink)", "stroke-width": 3, "stroke-linecap": "round" }, data);
 
-    meals.forEach(function (m, i) {
+    var mealDots = meals.map(function (m) {
       var p = pt(m, R);
-      svg.appendChild(node("circle", { cx: p[0], cy: p[1], r: 7, fill: "var(--paper)", stroke: "var(--ink)",
-        "stroke-width": 2.5, class: "meal", style: "animation-delay:" + (0.5 + i * 0.45) + "s" }));
+      return node("circle", { cx: p[0], cy: p[1], r: 7, fill: "var(--paper)", stroke: "var(--ink)",
+        "stroke-width": 2.5, class: "meal-dot", style: "transform-origin:" + p[0].toFixed(1) + "px " + p[1].toFixed(1) + "px" }, svg);
     });
 
-    // current time hand
-    var hand = node("line", { x1: C, y1: C, x2: C, y2: C - R + 14, stroke: "var(--night)", "stroke-width": 2, "stroke-linecap": "round" });
-    var tip = node("circle", { cx: C, cy: C - R + 14, r: 3.5, fill: "var(--night)" });
-    var g = node("g", {});
-    g.appendChild(hand); g.appendChild(tip);
-    svg.appendChild(g);
-    svg.appendChild(node("circle", { cx: C, cy: C, r: 46, fill: "var(--paper)" }));
-
+    var hand = node("g", {}, svg);
+    node("line", { x1: C, y1: C, x2: C, y2: C - R + 14, stroke: "var(--night)", "stroke-width": 2, "stroke-linecap": "round" }, hand);
+    node("circle", { cx: C, cy: C - R + 14, r: 3.5, fill: "var(--night)" }, hand);
+    node("circle", { cx: C, cy: C, r: 50, fill: "var(--paper)" }, svg);
     var time = node("text", { x: C, y: C - 4, "text-anchor": "middle", fill: "var(--ink)",
-      "font-size": 30, "font-weight": 300, "font-family": "var(--sans)", style: "font-variant-numeric: lining-nums tabular-nums" });
-    var city = node("text", { x: C, y: C + 20, "text-anchor": "middle", fill: "var(--muted)",
-      "font-size": 12.5, "font-family": "var(--sans)" });
-    city.textContent = SITE.city || "Taipei";
-    svg.appendChild(time); svg.appendChild(city);
+      "font-size": 30, "font-weight": 300, "font-family": "var(--sans)", style: "font-variant-numeric: lining-nums tabular-nums" }, svg);
+    var sub = node("text", { x: C, y: C + 20, "text-anchor": "middle", fill: "var(--muted)", "font-size": 12.5, "font-family": "var(--sans)" }, svg);
 
     el.insertBefore(svg, el.firstChild);
-    eat.style.setProperty("--len", eat.getTotalLength());
 
-    function tick() {
-      var parts;
-      try {
-        parts = new Intl.DateTimeFormat("en-GB", { timeZone: SITE.timezone || "Asia/Taipei",
-          hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date());
-      } catch (e) { parts = null; }
-      var hh, mm;
-      if (parts) {
-        parts.forEach(function (p) { if (p.type === "hour") hh = +p.value; if (p.type === "minute") mm = +p.value; });
-      } else { var d = new Date(); hh = d.getHours(); mm = d.getMinutes(); }
-      time.textContent = (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm;
-      g.setAttribute("transform", "rotate(" + ((hh + mm / 60) / 24 * 360) + " " + C + " " + C + ")");
+    function setWedge(t) {
+      if (t >= 23.999) { wedge.setAttribute("d", "M0 0H400V400H0Z"); return; }
+      var e = pt(t, 400), large = t > 12 ? 1 : 0;
+      wedge.setAttribute("d", "M" + C + " " + C + " L" + C + " " + (C - 400) + " A400 400 0 " + large + " 1 " + e[0].toFixed(1) + " " + e[1].toFixed(1) + " Z");
     }
-    tick();
-    setInterval(tick, 30000);
+    function setHand(t) { hand.setAttribute("transform", "rotate(" + (t / 24 * 360) + " " + C + " " + C + ")"); }
+    function setMeals(t) { mealDots.forEach(function (d, i) { d.classList.toggle("on", t >= meals[i]); }); }
+
+    function nowHours() {
+      var hh, mm;
+      try {
+        new Intl.DateTimeFormat("en-GB", { timeZone: SITE.timezone || "Asia/Taipei", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
+          .formatToParts(new Date()).forEach(function (p) { if (p.type === "hour") hh = +p.value; if (p.type === "minute") mm = +p.value; });
+      } catch (e) { var d = new Date(); hh = d.getHours(); mm = d.getMinutes(); }
+      return hh + mm / 60;
+    }
+
+    var live = false, raf = null;
+    function showNow() {
+      var n = nowHours();
+      setHand(n);
+      time.textContent = fmt(n);
+      sub.textContent = SITE.city || "Taipei";
+    }
+
+    function finish() {
+      setWedge(24); setMeals(24); live = true; showNow();
+      el.classList.remove("playing");
+    }
+
+    function play() {
+      if (reduce) { finish(); return; }
+      cancelAnimationFrame(raf);
+      live = false;
+      el.classList.add("playing");
+      var SWEEP = 4200, SETTLE = 900, t0 = null, target = nowHours();
+      function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+      function frame(ts) {
+        if (t0 === null) t0 = ts;
+        var k = ts - t0;
+        if (k < SWEEP) {
+          var t = 24 * ease(k / SWEEP);
+          setWedge(t); setHand(t); setMeals(t);
+          time.textContent = fmt(t);
+          sub.textContent = t >= eatStart && t <= eatEnd ? "eating window" : (t > eatEnd || t < 6 ? "overnight fast" : "fasting");
+          raf = requestAnimationFrame(frame);
+        } else if (k < SWEEP + SETTLE) {
+          setWedge(24); setMeals(24);
+          var s = (k - SWEEP) / SETTLE, from = 0, tt = from + (target - from) * (1 - Math.pow(1 - s, 3));
+          setHand(tt); time.textContent = fmt(tt); sub.textContent = SITE.city || "Taipei";
+          raf = requestAnimationFrame(frame);
+        } else {
+          finish();
+        }
+      }
+      setWedge(0); setMeals(0); setHand(0);
+      raf = requestAnimationFrame(frame);
+    }
+
+    // replay when the clock is clicked
+    svg.style.cursor = "pointer";
+    svg.setAttribute("tabindex", "0");
+    svg.addEventListener("click", play);
+    svg.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); } });
+
+    // start when the clock comes into view
+    if ("IntersectionObserver" in window && !reduce) {
+      setWedge(0); setMeals(0); setHand(0); time.textContent = "00:00"; sub.textContent = "";
+      var io = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { io.disconnect(); setTimeout(play, 350); }
+      }, { threshold: 0.4 });
+      io.observe(svg);
+    } else { finish(); }
+
+    setInterval(function () { if (live) showNow(); }, 30000);
   }
 
   /* ---------- Upload check ----------
