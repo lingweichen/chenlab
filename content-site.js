@@ -37,7 +37,7 @@ window.SITE = {
 
   // Your CV as a PDF: upload the file next to index.html and write its
   // name here, e.g. "CV_Ling-Wei_Chen.pdf". "" hides the button.
-  cvPdf: "",
+  cvPdf: "https://mega.nz/file/rIoE1RLK#mSRNzsHSO_T_sILJS8v0sjIC2ctjx5pkY3TKDvbFAy0",
 
   // Paste the address of your teaching website here to show a link
   // on the News & Resources page. Leave as "" to hide it.
