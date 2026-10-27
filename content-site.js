@@ -11,7 +11,7 @@ window.SITE = {
   university: "National Taiwan University",
   department: "Institute of Epidemiology and Preventive Medicine, College of Public Health",
   address: "No. 17, Xu-Zhou Road, Taipei 100, Taiwan",
-  email: "lingweichen@ntu.edu.tw",
+  email: "lingweichen [at] ntu.edu.tw",
   phone: "+886-2-3366-9537",
 
   // City and time zone shown on the home-page clock
